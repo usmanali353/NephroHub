@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:orientation="horizontal">
+    <ImageView
+        android:layout_height="40.0dip"
+        android:layout_width="40.0dip"
+        android:layout_marginBottom="16.0dip"
+        android:layout_marginTop="16.0dip"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="16.0dip"
+        android:src="@drawable/ico1"
+        android:id="@+id/imageView_round"/>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginLeft="16.0dip"
+        android:id="@+id/tips_name"
+        android:text="Tip Name"
+        android:paddingBottom="16.0dip"
+        android:paddingTop="16.0dip"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16.0dip"/>
+</LinearLayout>

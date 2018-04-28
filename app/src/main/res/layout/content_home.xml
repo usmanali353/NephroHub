@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="usmanali.nephrohub.Home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="#fcfcfc"
+        android:gravity="center"
+        android:id="@+id/ll">
+        <LinearLayout
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.CardView
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/diet_plan"
+                android:layout_width="160dp"
+                android:layout_height="190dp"
+                android:layout_margin="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/diet_plan"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Diet Plan"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"
+                        android:layout_margin="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Check your Dietry     Plan"
+                        android:padding="5dp"
+                        android:textColor="@android:color/darker_gray"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/medical_records"
+                android:layout_width="160dp"
+                android:layout_height="190dp"
+                android:layout_margin="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/medical_reports"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Medical Records"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"
+                        android:layout_margin="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Check your Medical Records"
+                        android:padding="5dp"
+                        android:textColor="@android:color/darker_gray"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.CardView
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="160dp"
+                android:id="@+id/scan_reports"
+                android:layout_height="190dp"
+                android:layout_margin="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/ocr"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Scan Reports"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"
+                        android:layout_margin="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Scan Reports and add Data"
+                        android:padding="5dp"
+                        android:textColor="@android:color/darker_gray"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="160dp"
+                android:id="@+id/health_tips"
+                android:layout_height="190dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/specialist" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Health Tips"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/lightgray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Check out Health Tips to be Healthy"
+                        android:textColor="@android:color/darker_gray" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.CardView
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/contact_us"
+                android:layout_width="340dp"
+                android:layout_height="150dp"
+                android:layout_margin="10dp">
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/contactus"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Contact Us"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightgray"
+                        android:layout_margin="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Get in Touch with Us"
+                        android:padding="5dp"
+                        android:textColor="@android:color/darker_gray"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+

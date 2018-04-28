@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="usmanali.nephrohub.add_reports"
+    tools:showIn="@layout/activity_add_reports">
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/btn1"
+        android:layout_marginTop="180dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:text="Scan Reports by OCR"
+        android:padding="16dp"
+        />
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btn1"
+        android:layout_below="@+id/btn1"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        android:padding="16dp"
+        android:text="Add Report Picture"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+</RelativeLayout>

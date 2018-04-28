@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="usmanali.nephrohub.add_report_picture"
+    tools:showIn="@layout/activity_add_report_picture"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_margin="10dp"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+     >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp"
+                android:text="Report Title"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/report_title"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:layout_marginBottom="10dp"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp"
+                android:text="Refered By"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/doctor_name"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:layout_marginBottom="10dp"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="14sp" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/upload_pic_btn"
+                android:layout_marginBottom="10dp"
+                android:text="Upload Picture"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:id="@+id/report_pic"
+                android:src="@drawable/medical_reports"
+                android:adjustViewBounds="true"
+                android:layout_marginBottom="10dp"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_report_btn"
+                android:text="Add Report"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>
+
+

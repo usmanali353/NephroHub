@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="16dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/medical_reports" />
+
+    <TextView
+        android:id="@+id/report_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="7dp"
+        android:layout_toEndOf="@+id/img"
+        android:singleLine="true"
+        android:text="Pregnency Test"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/report_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/doctor_name"
+        android:layout_below="@+id/doctor_name"
+        android:layout_marginTop="10dp"
+        android:text="29-1-2018" />
+
+    <TextView
+        android:id="@+id/doctor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/report_title"
+        android:layout_below="@+id/report_title"
+        android:text="Dr Bitch" />
+</RelativeLayout>

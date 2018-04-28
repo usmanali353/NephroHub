@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "392078148627",
+    "firebase_url": "https://nephrohub.firebaseio.com",
+    "project_id": "nephrohub",
+    "storage_bucket": "nephrohub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392078148627:android:49d64c9113db7544",
+        "android_client_info": {
+          "package_name": "usmanali.nephrohub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392078148627-2d1a3vuevjhdv4mrbj7g8k73qjefkgsl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "usmanali.nephrohub",
+            "certificate_hash": "22e3536d8d77c4d91345752435a1b583315da8a1"
+          }
+        },
+        {
+          "client_id": "392078148627-acn5s74gredksr7er69mvlapdbeqm6gu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2s56i25Ip6q_Aradxun_gfjr_Aa-MBiA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392078148627-acn5s74gredksr7er69mvlapdbeqm6gu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

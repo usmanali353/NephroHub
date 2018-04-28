@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Nephro Hub</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_health__tips">Health Tips</string>
+    <string name="title_activity_disorder__symtoms__causes__treatment">Disorder Detail</string>
+    <string name="title_activity_health_tips">Health Tips</string>
+    <string name="title_activity_tips_detail">Tips Detail</string>
+    <string name="title_activity_contact_us">Contact Us</string>
+    <string name="drawer_open">drawer open</string>
+    <string name="drawer_close">drawer close</string>
+    <string name="title_activity_add_reports">Add Reports</string>
+    <string name="title_activity_add_report_picture">Add Report Picture</string>
+    <string name="title_activity_medical_records">Medical Records</string>
+    <string name="title_activity_diet__plan">Diet Plan</string>
+    <string name="title_activity_scan__reports">Scan_Reports</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

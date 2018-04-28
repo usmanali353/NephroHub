@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="recipe_detail_frag_text_size_title">18.0sp</dimen>
+    <dimen name="update_padding_common">10.0dip</dimen>
+    <dimen name="margin_mediam">10.0dip</dimen>
+
+    <dimen name="margin_small">5.0dip</dimen>
+    <dimen name="txtsize_dashboard_header">16.0dip</dimen>
+</resources>

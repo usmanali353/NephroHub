@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minHeight="?android:listPreferredItemHeight"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:text="prescription"
+    android:paddingBottom="8.0dip"
+    android:id="@+id/list_item_med_textview"
+    android:gravity="center_vertical"
+    android:textSize="@dimen/abc_text_size_subhead_material"/>

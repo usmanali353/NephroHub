@@ -1,0 +1,102 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+/*Css Reset*/
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	margin: 0 10px;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+IMG,img{
+margin: 0 auto !important;
+text-align: center !important;
+max-width: 100% !important;
+display: block !important;
+float: inherit !important;
+height: auto !important;
+}
+p,P,FONT,font{
+font-size: 13pt !important;
+line-height: 16pt !important;
+color: #777 !important;
+padding: 0 !important;
+margin: 0 !important;
+ overflow-x: hidden !important;
+/*text-align: justify !important;	*/
+}
+p,P{
+	margin-bottom: 12pt !important;
+}
+BODY,body{
+	padding-top: 25px !important;
+	margin: 20px !important;
+}
+
+B,b {
+	font-weight: bold;
+}
+LI,li {
+	list-style: circle;
+}
+
+a.tryitbtn,a.tryitbtn:link,a.tryitbtn:visited,a.showbtn,a.showbtn:link,a.showbtn:visited
+{
+display:block;
+color:#FFFFFF;
+background-color:#44a43a;
+font-weight:bold;
+font-size:12px;
+text-align:center;
+padding: 20px;
+text-decoration:none;
+margin: 10px auto;
+width: 200px;
+font-size: 18px;
+border:1px solid #aaaaaa;
+border:1px solid #8AC007;
+border-radius:5px;
+white-space:nowrap;
+}
+
+a.tryitbtn:active{
+background-color:#ffffff;
+color:#44a43a;
+}

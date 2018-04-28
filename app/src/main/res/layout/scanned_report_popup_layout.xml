@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:weightSum="1.0"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:weightSum="1.0"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:weightSum="1.0"
+            android:layout_height="wrap_content"
+            android:layout_width="0.0dip"
+            android:padding="@dimen/margin_small"
+            android:orientation="horizontal"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:text="Tests"
+                android:id="@+id/tests"
+                android:layout_gravity="center" android:gravity="center"
+                android:textColor="@color/clr_black"
+                android:textStyle="bold"
+                android:textSize="@dimen/txtsize_dashboard_header"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_height="fill_parent"
+            android:layout_width="1.0dip"
+            android:background="@color/clr_darkgrey"/>
+
+
+        <LinearLayout
+            android:weightSum="1.0"
+            android:layout_height="wrap_content"
+            android:layout_width="0.0dip"
+            android:padding="@dimen/margin_small"
+            android:orientation="horizontal"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:text="Results"
+                android:id="@+id/results"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/clr_black"
+                android:textStyle="bold"
+                android:textSize="@dimen/txtsize_dashboard_header"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_height="1.0dip"
+        android:layout_width="fill_parent"
+        android:background="@color/clr_darkgrey"/>
+
+</LinearLayout>
+
