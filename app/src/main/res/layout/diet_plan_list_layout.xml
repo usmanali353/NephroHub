@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
-        android:id="@+id/imgThumbnail"
+        android:id="@+id/food_img"
         android:layout_width="90dip"
         android:layout_height="90dip"
         android:layout_marginRight="10.0dip"
@@ -17,12 +17,12 @@
         android:id="@+id/lytItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/imgThumbnail"
+        android:layout_toRightOf="@id/food_img"
         android:layout_centerVertical="true">
         <TextView
             android:textSize="20sp"
             android:textColor="#ff212121"
-            android:id="@+id/txtRecipeName"
+            android:id="@+id/food_name"
             android:text="Custard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
