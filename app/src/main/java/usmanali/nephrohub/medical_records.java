@@ -10,9 +10,12 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
+
 public class medical_records extends AppCompatActivity {
  TabLayout tabs;
  ViewPager pager;
+    String reg_num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +23,10 @@ public class medical_records extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Paper.init(medical_records.this);
         tabs=(TabLayout) findViewById(R.id.tabs);
         pager=(ViewPager) findViewById(R.id.pager);
+        reg_num= Paper.book().read("Registration_number","Not Found").toString();
         setupViewPager(pager);
         tabs.setupWithViewPager(pager);
     }
@@ -30,7 +35,9 @@ public class medical_records extends AppCompatActivity {
         adapter.addFragment(new image_reports_fragment(), "Image Reports");
         adapter.addFragment(new scanned_reports_fragment(), "Scanned Reports");
         adapter.addFragment(new prescriptions_fragment(), "Prescription");
-        adapter.addFragment(new KCG_Reports(),"KCG Lab Reports");
+        if(!reg_num.equals("Not Found")) {
+            adapter.addFragment(new KCG_Reports(), "KCG Lab Reports");
+        }
         viewPager.setAdapter(adapter);
     }
 

@@ -332,7 +332,13 @@ return rn;
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
-        }).setView(v).show();
+        })/*.setNeutralButton("Use as Guest", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(MainActivity.this, Home.class));
+                finish();
+            }*/
+        .setView(v).show();
     }
     public static boolean isEmailValid(String email) {
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";

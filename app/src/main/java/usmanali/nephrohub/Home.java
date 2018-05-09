@@ -83,14 +83,14 @@ ActionBarDrawerToggle actionBarDrawerToggle;
         }else if(view.getId()==R.id.health_tips){
             Intent i=new Intent(Home.this,HealthTips.class);
             startActivity(i);
-        }else if(view.getId()==R.id.medical_records){
-            Intent i=new Intent(Home.this,medical_records.class);
-            startActivity(i);
         }else if(view.getId()==R.id.contact_us){
             Intent i=new Intent(Home.this,ContactUs.class);
             startActivity(i);
         }else if(view.getId()==R.id.diet_plan){
             Intent i=new Intent(Home.this,Diet_Plan.class);
+            startActivity(i);
+        }else if(view.getId()==R.id.medical_records){
+            Intent i=new Intent(Home.this,medical_records.class);
             startActivity(i);
         }
     }

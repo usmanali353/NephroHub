@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -46,6 +48,9 @@ public class add_report_picture extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference image_reports;
     Uri image_report_uri;
+    String str_img;
+    dbhelper dbh;
+    String reg_num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +59,8 @@ public class add_report_picture extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Paper.init(add_report_picture.this);
+        dbh=new dbhelper(add_report_picture.this);
+        reg_num=Paper.book().read("Registration_number","Not Found");
         Upload_Picture_btn = (Button) findViewById(R.id.upload_pic_btn);
         report_title = (TextView) findViewById(R.id.report_title);
         ref_by = (TextView) findViewById(R.id.doctor_name);
@@ -68,7 +75,11 @@ public class add_report_picture extends AppCompatActivity {
         add_report_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add_report_to_firebase();
+                if(!reg_num.equals("Not Found")) {
+                    add_report_to_firebase();
+                }else{
+                    add_image_reports_guest();
+                }
             }
         });
         storage = FirebaseStorage.getInstance();
@@ -147,6 +158,36 @@ public class add_report_picture extends AppCompatActivity {
                      Toast.makeText(add_report_picture.this,e.getMessage(),Toast.LENGTH_LONG).show();
                  }
              });
+        }else{
+            Toast.makeText(add_report_picture.this, "Please add Required Information",Toast.LENGTH_LONG).show();
+        }
+    }
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+    public void add_image_reports_guest(){
+        if (bitmap != null && !report_title.getText().toString().isEmpty() && !ref_by.getText().toString().isEmpty()) {
+            Reports r = new Reports();
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            String date = df.format(c.getTime());
+            r.setReport_date(date);
+            r.setReport_title(report_title.getText().toString());
+            r.setRef_by(ref_by.getText().toString());
+            str_img=BitMapToString(bitmap);
+            r.setImage_url(str_img);
+            Gson g=new Gson();
+            String json=g.toJson(r);
+            long l=dbh.insert_image_reports(json);
+            if(l==-1){
+                Toast.makeText(add_report_picture.this,"Report was not Added",Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(add_report_picture.this,"Report was Added Successfully",Toast.LENGTH_LONG).show();
+            }
         }else{
             Toast.makeText(add_report_picture.this, "Please add Required Information",Toast.LENGTH_LONG).show();
         }

@@ -41,12 +41,6 @@ ArrayList<String> heading_list;
         food_list.expandGroup(0);
         food_list.expandGroup(1);
         food_list.expandGroup(2);
-        food_list.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                return true;
-            }
-        });
        return v;
     }
 public void prepare_food_list(){
