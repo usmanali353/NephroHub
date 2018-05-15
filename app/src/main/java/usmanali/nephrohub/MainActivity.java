@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
     MaterialEditText email,password,name,phone,registration_number;
     RelativeLayout rootlayout;
     TextView txt_forgot_password;
-    FirebaseAuth auth;
-    FirebaseDatabase db;
-    DatabaseReference users;
-    String rn;
-    long count;
-     User user;
+    FirebaseAuth auth;//fire authentication object
+    FirebaseDatabase db;//firebase db object
+    DatabaseReference users;//store reference of node of firebase
+    String rn;//storing registration number
+    long count;// storing count of paatients currently registered
+     User user;//object of user class
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -91,13 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 show_login_dialog();
             }
         });
-        String Username= Paper.book().read("Email");
-        String Password= Paper.book().read("Password");
-        if(Username!=null&&Password!=null){
-            if(!TextUtils.isEmpty(Username)&&!TextUtils.isEmpty(Password)){
-                auto_login(Username,Password);
-            }
-        }
     }
 private String get_last_registration_number(){
 users.addValueEventListener(new ValueEventListener() {
@@ -112,7 +105,7 @@ users.addValueEventListener(new ValueEventListener() {
 
     @Override
     public void onCancelled(DatabaseError databaseError) {
-
+      Toast.makeText(MainActivity.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
     }
 });
 
@@ -264,6 +257,14 @@ return rn;
         View v=LayoutInflater.from(MainActivity.this).inflate(R.layout.layout_login,null);
         email=(MaterialEditText) v.findViewById(R.id.emailtxt);
         password=(MaterialEditText) v.findViewById(R.id.passwordtxt);
+        String Username= Paper.book().read("Email");
+        String Password= Paper.book().read("Password");
+        if(Username!=null&&Password!=null){
+            if(!TextUtils.isEmpty(Username)&&!TextUtils.isEmpty(Password)){
+                email.setText(Username);
+                password.setText(Password);
+            }
+        }
         login_dialog.setPositiveButton("Sign In", new DialogInterface.OnClickListener() {
 
             @Override
@@ -335,10 +336,9 @@ return rn;
         })/*.setNeutralButton("Use as Guest", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(MainActivity.this, Home.class));
-                finish();
-            }*/
-        .setView(v).show();
+                startActivity(new Intent(MainActivity.this,Home.class));
+            }
+        })*/.setView(v).show();
     }
     public static boolean isEmailValid(String email) {
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
@@ -346,30 +346,4 @@ return rn;
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-    private void auto_login(String username, String password) {
-               final android.app.AlertDialog waitingdialog=new SpotsDialog(MainActivity.this);
-                waitingdialog.show();
-                waitingdialog.setMessage("Please Wait...");
-                waitingdialog.setCancelable(false);
-
-                 auth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-             @Override
-           public void onComplete(@NonNull Task<AuthResult> task) {
-                              if(task.isSuccessful()){
-                                      waitingdialog.dismiss();
-                                        Toast.makeText(MainActivity.this,"Welcome "+Paper.book().read("Name"),Toast.LENGTH_LONG).show();
-                                         startActivity(new Intent(MainActivity.this,Home.class));
-                                        finish();
-                                     }
-                           }
-      }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                              waitingdialog.dismiss();
-                               Toast.makeText(MainActivity.this,"Login failed "+e.getMessage(),Toast.LENGTH_LONG).show();
-                           }
-       });
-            }
-
-
 }

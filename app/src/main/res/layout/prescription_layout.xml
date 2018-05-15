@@ -6,6 +6,7 @@
     android:layout_width="fill_parent"
     android:text="prescription"
     android:paddingBottom="8.0dip"
-    android:id="@+id/list_item_med_textview"
+    android:paddingStart="8.0dip"
+    android:id="@+id/doctor_instructions"
     android:gravity="center_vertical"
     android:textSize="@dimen/abc_text_size_subhead_material"/>

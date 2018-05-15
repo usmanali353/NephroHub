@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import io.paperdb.Paper;
 
@@ -38,6 +39,7 @@ public class image_reports_fragment extends Fragment {
      ProgressBar pb;
     String json;
     dbhelper dbh;
+    Gson g;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class image_reports_fragment extends Fragment {
         Paper.init(getActivity());
         String reg_num= Paper.book().read("Registration_number","Not Found").toString();
         dbh=new dbhelper(getActivity());
+        g=new Gson();
             reportsArrayList=new ArrayList<>();
         db = FirebaseDatabase.getInstance();
        pb=(ProgressBar) v.findViewById(R.id.pb);
@@ -64,6 +67,7 @@ public class image_reports_fragment extends Fragment {
                         pb.setVisibility(View.GONE);
                         //Gson g=new Gson();
                          //json=g.toJson(reportsArrayList);
+                        Collections.reverse(reportsArrayList);
                         Paper.book().write("Offline_image_reports_list",reportsArrayList);
                         list.setAdapter(new medical_records_list_adapter(getActivity(), reportsArrayList));
                     } else {
@@ -99,12 +103,12 @@ public class image_reports_fragment extends Fragment {
             Toast.makeText(getActivity(), "No Reports Added Yet", Toast.LENGTH_LONG).show();
         }else{
             while (reports_cursor.moveToNext()) {
-                Gson g=new Gson();
                 String json=reports_cursor.getString(1);
               Reports  r =g.fromJson(json, usmanali.nephrohub.Reports.class);
                 reportsArrayList.add(r);
             }
             if(reportsArrayList.size()>0){
+                Collections.reverse(reportsArrayList);
                 list.setAdapter(new medical_records_list_adapter(getActivity(),reportsArrayList));
             }
         }

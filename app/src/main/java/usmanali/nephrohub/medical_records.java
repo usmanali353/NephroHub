@@ -1,4 +1,7 @@
 package usmanali.nephrohub;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -32,11 +35,14 @@ public class medical_records extends AppCompatActivity {
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new image_reports_fragment(), "Image Reports");
+        if(isNetworkAvailable()||reg_num.equals("Not Found")) {
+            adapter.addFragment(new image_reports_fragment(), "Image Reports");
+        }
         adapter.addFragment(new scanned_reports_fragment(), "Scanned Reports");
         adapter.addFragment(new prescriptions_fragment(), "Prescription");
         if(!reg_num.equals("Not Found")) {
             adapter.addFragment(new KCG_Reports(), "KCG Lab Reports");
+
         }
         viewPager.setAdapter(adapter);
     }
@@ -68,6 +74,12 @@ public class medical_records extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

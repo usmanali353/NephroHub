@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import io.paperdb.Paper;
 
@@ -38,6 +39,7 @@ public class scanned_reports_fragment extends Fragment {
     String json;
     dbhelper dbh;
     usmanali.nephrohub.Scanned_reports sr;
+    Gson g;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class scanned_reports_fragment extends Fragment {
         Paper.init(getActivity());
         dbh=new dbhelper(getActivity());
         String reg_num= Paper.book().read("Registration_number","Not Found").toString();
+        g=new Gson();
         reportsArrayList=new ArrayList<>();
         db = FirebaseDatabase.getInstance();
 
@@ -63,6 +66,7 @@ public class scanned_reports_fragment extends Fragment {
                     }
                     if (reportsArrayList.size() > 0) {
                         pb.setVisibility(View.GONE);
+                        Collections.reverse(reportsArrayList);
                         Paper.book().write("Offline_scanned_reports_list",reportsArrayList);
                         list.setAdapter(new scanned_reports_adapter(reportsArrayList, getActivity()));
                     } else {
@@ -86,12 +90,12 @@ public class scanned_reports_fragment extends Fragment {
                 Toast.makeText(getActivity(), "No Reports Added Yet", Toast.LENGTH_LONG).show();
             }else{
                 while (reports_cursor.moveToNext()) {
-                Gson g=new Gson();
                 String json=reports_cursor.getString(1);
                 sr =g.fromJson(json, usmanali.nephrohub.Scanned_reports.class);
                 reportsArrayList.add(sr);
             }
             if(reportsArrayList.size()>0){
+                Collections.reverse(reportsArrayList);
                 list.setAdapter(new scanned_reports_adapter(reportsArrayList,getActivity()));
             }
         }

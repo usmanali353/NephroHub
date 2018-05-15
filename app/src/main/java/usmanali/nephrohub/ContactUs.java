@@ -23,6 +23,7 @@ import io.paperdb.Paper;
 public class ContactUs extends AppCompatActivity {
 EditText message,subject,name,email;
 Button send_email;
+    String reg_num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,16 +31,19 @@ Button send_email;
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Paper.init(ContactUs.this);
+        String reg_num= Paper.book().read("Registration_number","Not Found").toString();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         message=(EditText) findViewById(R.id.your_message);
         email=(EditText) findViewById(R.id.your_email);
         subject=(EditText) findViewById(R.id.your_subject);
         name=(EditText) findViewById(R.id.your_name);
         send_email=(Button) findViewById(R.id.post_message);
-        name.setText(Paper.book().read("Name").toString());
-        name.setEnabled(false);
-        email.setText(Paper.book().read("Email").toString());
-        email.setEnabled(false);
+        if(!reg_num.equals("Not Found")) {
+            name.setText(Paper.book().read("Name").toString());
+            name.setEnabled(false);
+            email.setText(Paper.book().read("Email").toString());
+            email.setEnabled(false);
+        }
         send_email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

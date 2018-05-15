@@ -14,6 +14,7 @@ public class dbhelper extends SQLiteOpenHelper {
     static final String Database_NAME="Reports";
     static final String SCANNED_REPORTS_TABLE="Scanned_reports";
     static final String IMAGE_REPORTS_TABLE="Image_reports";
+    static final String PRESCRIPTION_TABLE="Prescription";
     public dbhelper(Context context) {
         super(context,Database_NAME, null, 1);
     }
@@ -22,12 +23,14 @@ public class dbhelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
       db.execSQL("CREATE TABLE "+SCANNED_REPORTS_TABLE+"(id INTEGER PRIMARY KEY AUTOINCREMENT,scanned_reports_obj TEXT )");
         db.execSQL("CREATE TABLE "+IMAGE_REPORTS_TABLE+"(id INTEGER PRIMARY KEY AUTOINCREMENT,image_reports_obj TEXT )");
+        db.execSQL("CREATE TABLE "+PRESCRIPTION_TABLE+"(id INTEGER PRIMARY KEY AUTOINCREMENT,prescriptions_obj TEXT )");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
       db.execSQL("DROP TABLE IF EXISTS "+SCANNED_REPORTS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS "+IMAGE_REPORTS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS "+PRESCRIPTION_TABLE);
         onCreate(db);
     }
     public long insert_scanned_reports(String scanned_reports_obj){
@@ -44,6 +47,13 @@ public class dbhelper extends SQLiteOpenHelper {
       long l= db.insert(IMAGE_REPORTS_TABLE,null,cv);
         return l;
     }
+    public long insert_prescription(String prescription_obj){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put("prescriptions_obj",prescription_obj);
+        long l= db.insert(PRESCRIPTION_TABLE,null,cv);
+        return l;
+    }
     public Cursor read_scanned_reports(){
         SQLiteDatabase db=this.getReadableDatabase();
      Cursor c= db.rawQuery("SELECT * FROM "+SCANNED_REPORTS_TABLE,null);
@@ -52,6 +62,11 @@ public class dbhelper extends SQLiteOpenHelper {
     public Cursor read_image_reports(){
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor c= db.rawQuery("SELECT * FROM "+IMAGE_REPORTS_TABLE,null);
+        return c;
+    }
+    public Cursor read_prescription(){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+PRESCRIPTION_TABLE,null);
         return c;
     }
 }

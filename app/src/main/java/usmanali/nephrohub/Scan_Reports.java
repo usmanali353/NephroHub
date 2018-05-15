@@ -52,7 +52,7 @@ public class Scan_Reports extends AppCompatActivity {
     private TextRecognizer detector;
     dbhelper dbh;
     String reg_num;
-
+    Gson g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +63,7 @@ public class Scan_Reports extends AppCompatActivity {
         getSupportActionBar().setTitle("Scan Reports by OCR");
         Paper.init(Scan_Reports.this);
         dbh = new dbhelper(Scan_Reports.this);
+        g=new Gson();
         reg_num=Paper.book().read("Registration_number","Not Found");
         detector = new TextRecognizer.Builder(getApplicationContext()).build();
         wordlist = new ArrayList<>();
@@ -129,13 +130,13 @@ public class Scan_Reports extends AppCompatActivity {
                             if (textBlocks.size() == 0) {
                                 Toast.makeText(Scan_Reports.this, "Unable to Scan Image", Toast.LENGTH_LONG).show();
                             } else if (words.matches(".*\\d+.*")) {
-                                if (words.length() > 0)
+                                if (!words.isEmpty())
                                     valuelist.add(words);
                                 reports.setResults(valuelist);
 
                             } else {
-                                String scl = words.replaceAll("[^a-zA-Z0-9]", "");
-                                if (scl.length() > 0)
+                                String scl = words.replaceAll("[^a-zA-Z0-9]","");
+                                if (!scl.isEmpty())
                                     wordlist.add(scl);
                                 reports.setTests(wordlist);
                             }
@@ -163,7 +164,7 @@ public class Scan_Reports extends AppCompatActivity {
     }
 
     public void add_ocr_report_to_firebase() {
-        if (doctor_name.getText() == null || report_title.getText().toString() == null || bitmap == null) {
+        if (doctor_name.getText().toString().isEmpty() || report_title.getText().toString().isEmpty() || bitmap == null) {
             Toast.makeText(Scan_Reports.this, "Please Provide all Required Information", Toast.LENGTH_LONG).show();
         } else {
             usmanali.nephrohub.Scanned_reports sr = process();
@@ -205,13 +206,12 @@ public class Scan_Reports extends AppCompatActivity {
     }
 
     public void add_ocr_reports_guest() {
-        if (doctor_name.getText() == null || report_title.getText().toString() == null || bitmap == null) {
+        if (doctor_name.getText().toString().isEmpty()|| report_title.getText().toString().isEmpty() || bitmap == null) {
             Toast.makeText(Scan_Reports.this, "Please Provide all Required Information", Toast.LENGTH_LONG).show();
         } else {
             usmanali.nephrohub.Scanned_reports sr = process();
             if (!wordlist.isEmpty() || !valuelist.isEmpty()) {
                 if (wordlist.size() == valuelist.size()) {
-                    Gson g = new Gson();
                     String scanned_report_obj = g.toJson(sr);
                     long l = dbh.insert_scanned_reports(scanned_report_obj);
                     if (l == -1) {

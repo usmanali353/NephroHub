@@ -86,6 +86,10 @@
                 android:value="usmanali.nephrohub.Home" />
         </activity>
         <activity
+            android:name=".Add_prescription"
+            android:parentActivityName=".add_reports"
+            />
+        <activity
             android:name=".Scan_Reports"
             android:label="@string/title_activity_scan__reports"
             android:parentActivityName=".add_reports"

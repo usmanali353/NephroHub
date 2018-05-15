@@ -42,13 +42,22 @@ public class scanned_report_popup_adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView==null){
-            convertView=LayoutInflater.from(parent.getContext()).inflate(R.layout.scanned_report_popup_layout,parent,false);
+        scan_reports_popup_viewholder holder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.scanned_report_popup_layout, parent, false);
+            holder = new scan_reports_popup_viewholder();
+            holder.tests = (TextView) convertView.findViewById(R.id.tests);
+            holder.results = (TextView) convertView.findViewById(R.id.results);
+            convertView.setTag(holder);
+        } else {
+              holder=(scan_reports_popup_viewholder) convertView.getTag();
         }
-        TextView tests=(TextView) convertView.findViewById(R.id.tests);
-        TextView results=(TextView) convertView.findViewById(R.id.results);
-        tests.setText(testlist.get(position));
-        results.setText(resultlist.get(position));
+        holder.tests.setText(testlist.get(position));
+        holder.results.setText(resultlist.get(position));
         return convertView;
     }
+
+}
+class scan_reports_popup_viewholder{
+    TextView tests,results;
 }

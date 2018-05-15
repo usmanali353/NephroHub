@@ -44,16 +44,21 @@ public class scanned_reports_adapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView,  ViewGroup parent) {
         final Scanned_reports medical_records=reportslist.get(position);
+        scanned_reports_viewholder holder;
         LayoutInflater inflater=LayoutInflater.from(c);
         if(convertView==null) {
             convertView=inflater.inflate(R.layout.medical_records_list_layout, parent, false);
+            holder=new scanned_reports_viewholder();
+            holder.doctor_name=(TextView) convertView.findViewById(R.id.doctor_name);
+            holder.report_date=(TextView) convertView.findViewById(R.id.report_date);
+             holder.report_title=(TextView) convertView.findViewById(R.id.report_title);
+            convertView.setTag(holder);
+        }else{
+            holder=(scanned_reports_viewholder) convertView.getTag();
         }
-        TextView doctor_name=(TextView) convertView.findViewById(R.id.doctor_name);
-        TextView report_date=(TextView) convertView.findViewById(R.id.report_date);
-        TextView report_title=(TextView) convertView.findViewById(R.id.report_title);
-        report_title.setText(medical_records.getReport_title());
-        doctor_name.setText(medical_records.getRef_by());
-        report_date.setText(medical_records.getDate());
+        holder.report_title.setText(medical_records.getReport_title());
+        holder.doctor_name.setText(medical_records.getRef_by());
+        holder.report_date.setText(medical_records.getDate());
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +67,7 @@ public class scanned_reports_adapter extends BaseAdapter {
                 AlertDialog.Builder scanned_report_popup =new AlertDialog.Builder(c);
                 scanned_report_popup.setTitle(medical_records.getReport_title());
                 ListView rv=(ListView) sv.findViewById(R.id.testsandresults);
-               View hv=LayoutInflater.from(c).inflate(R.layout.scanned_report_popup_layout,null);
+                View hv=LayoutInflater.from(c).inflate(R.layout.scanned_report_popup_layout,null);
                 rv.addHeaderView(hv);
                 rv.setAdapter(new scanned_report_popup_adapter(medical_records.getTests(),medical_records.getResults()));
                 scanned_report_popup .setView(sv);
@@ -71,4 +76,9 @@ public class scanned_reports_adapter extends BaseAdapter {
         });
         return convertView;
     }
+}
+class scanned_reports_viewholder{
+    TextView doctor_name;
+    TextView report_date;
+    TextView report_title;
 }

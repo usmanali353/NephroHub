@@ -51,6 +51,7 @@ public class add_report_picture extends AppCompatActivity {
     String str_img;
     dbhelper dbh;
     String reg_num;
+    Gson g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,7 @@ public class add_report_picture extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Paper.init(add_report_picture.this);
         dbh=new dbhelper(add_report_picture.this);
+        g=new Gson();
         reg_num=Paper.book().read("Registration_number","Not Found");
         Upload_Picture_btn = (Button) findViewById(R.id.upload_pic_btn);
         report_title = (TextView) findViewById(R.id.report_title);
@@ -180,7 +182,6 @@ public class add_report_picture extends AppCompatActivity {
             r.setRef_by(ref_by.getText().toString());
             str_img=BitMapToString(bitmap);
             r.setImage_url(str_img);
-            Gson g=new Gson();
             String json=g.toJson(r);
             long l=dbh.insert_image_reports(json);
             if(l==-1){
