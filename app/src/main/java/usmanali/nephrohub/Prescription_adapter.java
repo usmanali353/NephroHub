@@ -1,5 +1,7 @@
 package usmanali.nephrohub;
 
+import android.content.Intent;
+import android.provider.AlarmClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +37,7 @@ public class Prescription_adapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         prescription_list_viewholder holder;
         if(convertView==null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.prescription_layout, parent, false);
@@ -46,6 +48,16 @@ public class Prescription_adapter extends BaseAdapter {
             holder=(prescription_list_viewholder) convertView.getTag();
         }
         holder.prescription.setText(prescription_list.get(position).getMedicine_name()+" "+prescription_list.get(position).getDosage()+" mg"+"\n"+prescription_list.get(position).getDoctor_instructions());
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openClockIntent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+               /* openClockIntent.putExtra(AlarmClock.EXTRA_HOUR,10);
+                openClockIntent.putExtra(AlarmClock.EXTRA_MINUTES,00);
+                openClockIntent.putExtra(AlarmClock.EXTRA_MESSAGE,"Take "+prescription_list.get(position).getMedicine_name());*/
+                parent.getContext().startActivity(openClockIntent);
+            }
+        });
         return convertView;
     }
 }

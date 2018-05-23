@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import io.paperdb.Paper;
 
@@ -32,6 +33,7 @@ ActionBarDrawerToggle actionBarDrawerToggle;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Paper.init(Home.this);
+        FirebaseMessaging.getInstance().subscribeToTopic("kcg_notifications");
         scan_reports=(CardView) findViewById(R.id.scan_reports);
         health_tips=(CardView) findViewById(R.id.health_tips);
         contact_us=(CardView) findViewById(R.id.contact_us);
