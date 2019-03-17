@@ -11,6 +11,7 @@ import android.webkit.WebView;
 
 public class TipsDetail extends AppCompatActivity {
 WebView description;
+  //  String[] details ={"1st description","2nd description"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +20,7 @@ WebView description;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // details[getIntent().getIntExtra("position",0)];
         description=(WebView) findViewById(R.id.desc);
         description.setVerticalScrollBarEnabled(true);
         description.setHorizontalScrollBarEnabled(true);

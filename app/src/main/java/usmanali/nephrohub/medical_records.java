@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.paperdb.Paper;
+import usmanali.nephrohub.Fragments.image_reports_fragment;
+import usmanali.nephrohub.Fragments.prescriptions_fragment;
+import usmanali.nephrohub.Fragments.scanned_reports_fragment;
 
 public class medical_records extends AppCompatActivity {
  TabLayout tabs;
@@ -29,21 +32,20 @@ public class medical_records extends AppCompatActivity {
         Paper.init(medical_records.this);
         tabs=(TabLayout) findViewById(R.id.tabs);
         pager=(ViewPager) findViewById(R.id.pager);
-        reg_num= Paper.book().read("Registration_number","Not Found").toString();
+        reg_num= Paper.book().read("user_id","Not Found").toString();
         setupViewPager(pager);
         tabs.setupWithViewPager(pager);
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        if(isNetworkAvailable()||reg_num.equals("Not Found")) {
+        if(isNetworkAvailable()) {
             adapter.addFragment(new image_reports_fragment(), "Image Reports");
         }
         adapter.addFragment(new scanned_reports_fragment(), "Scanned Reports");
-        adapter.addFragment(new prescriptions_fragment(), "Prescription");
-        if(!reg_num.equals("Not Found")) {
-            adapter.addFragment(new KCG_Reports(), "KCG Lab Reports");
-
+        if (reg_num.equals("Not Found")){
+            adapter.addFragment(new prescriptions_fragment(), "Prescription");
         }
+
         viewPager.setAdapter(adapter);
     }
 

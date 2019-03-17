@@ -1,8 +1,6 @@
 package usmanali.nephrohub;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +11,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import usmanali.nephrohub.Model.Prescription;
+import usmanali.nephrohub.Model.dbhelper;
 
 public class Add_prescription extends AppCompatActivity {
 TextInputLayout medicine_name_textinputlayout,dosage_textinputlayout,doctor_instructions_textinputlayout;

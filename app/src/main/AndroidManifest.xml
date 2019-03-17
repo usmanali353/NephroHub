@@ -2,31 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="usmanali.nephrohub">
 
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+        android:largeHeap="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="ocr" />
-
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
@@ -40,6 +33,11 @@
             android:name=".TipsDetail"
             android:label="@string/title_activity_tips_detail"
             android:parentActivityName=".HealthTips"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".medical_records"
+            android:label="@string/title_activity_medical_records"
+            android:parentActivityName=".Home"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ContactUs"
@@ -58,6 +56,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="usmanali.nephrohub.Home" />
         </activity>
+        <meta-data
+                     android:name="com.google.android.gms.vision.DEPENDENCIES"
+                     android:value="ocr" />
+
         <activity
             android:name=".add_report_picture"
             android:label="@string/title_activity_add_report_picture"
@@ -66,15 +68,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="usmanali.nephrohub.add_reports" />
-        </activity>
-        <activity
-            android:name=".medical_records"
-            android:label="@string/title_activity_medical_records"
-            android:parentActivityName=".Home"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="usmanali.nephrohub.Home" />
         </activity>
         <activity
             android:name=".Diet_Plan"
@@ -86,10 +79,6 @@
                 android:value="usmanali.nephrohub.Home" />
         </activity>
         <activity
-            android:name=".Add_prescription"
-            android:parentActivityName=".add_reports"
-            />
-        <activity
             android:name=".Scan_Reports"
             android:label="@string/title_activity_scan__reports"
             android:parentActivityName=".add_reports"
@@ -98,12 +87,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="usmanali.nephrohub.add_reports" />
         </activity>
-        <service
-            android:name=".firebase_messaging_service">
+        <activity
+            android:name=".Add_prescription"
+            android:label="@string/title_activity_add_prescription"
+            android:theme="@style/AppTheme" />
+
+        <service android:name=".firebase_messaging_service">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".Splash_Screen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -39,7 +39,7 @@ public class sendmail extends AsyncTask {
         this.subject = subject;
         this.message = message;
       waiting_dialog =new SpotsDialog(context);
-        waiting_dialog.setMessage("Please Wait...");
+       // waiting_dialog.setMessage("Please Wait...");
         waiting_dialog.setCancelable(false);
 
     }

@@ -3,13 +3,13 @@ package usmanali.nephrohub;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import usmanali.nephrohub.Adapters.Health_Tips_Adapter;
 
 public class HealthTips extends AppCompatActivity {
 
@@ -31,6 +31,8 @@ public class HealthTips extends AppCompatActivity {
                     case 0:
                         intent.putExtra("file_name","content1");
                         startActivity(intent);
+                        //intent.putExtra("position",i);
+                        //startActivity(intent);
                         break;
                     case 1:
                         intent.putExtra("file_name","content2");

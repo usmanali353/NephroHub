@@ -14,6 +14,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -25,7 +26,7 @@ CardView scan_reports,health_tips,contact_us,medical_records,diet_plan;
 NavigationView nv;
 DrawerLayout drawerlayout;
 ActionBarDrawerToggle actionBarDrawerToggle;
-
+    String reg_num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ ActionBarDrawerToggle actionBarDrawerToggle;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Paper.init(Home.this);
+        reg_num= Paper.book().read("user_id","Not Found").toString();
         FirebaseMessaging.getInstance().subscribeToTopic("kcg_notifications");
         scan_reports=(CardView) findViewById(R.id.scan_reports);
         health_tips=(CardView) findViewById(R.id.health_tips);
@@ -41,6 +43,11 @@ ActionBarDrawerToggle actionBarDrawerToggle;
         diet_plan=(CardView) findViewById(R.id.diet_plan);
         drawerlayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         nv=(NavigationView) findViewById(R.id.nav_view);
+        if(!reg_num.equals("Not Found")) {
+            nv.inflateMenu(R.menu.nav_bar_menu);
+        }else if(reg_num.equals("Not Found")){
+            nv.inflateMenu(R.menu.nav_bar_menu_guest);
+        }
         scan_reports.setOnClickListener(this);
         health_tips.setOnClickListener(this);
         contact_us.setOnClickListener(this);
@@ -86,8 +93,13 @@ ActionBarDrawerToggle actionBarDrawerToggle;
             Intent i=new Intent(Home.this,HealthTips.class);
             startActivity(i);
         }else if(view.getId()==R.id.contact_us){
-            Intent i=new Intent(Home.this,ContactUs.class);
-            startActivity(i);
+            if(!reg_num.equals("Not Found")) {
+                Intent i = new Intent(Home.this, ContactUs.class);
+                startActivity(i);
+            }else if (reg_num.equals("Not Found")){
+                Toast.makeText(Home.this,"Only Registered patients can use this feature",Toast.LENGTH_LONG).show();
+            }
+
         }else if(view.getId()==R.id.diet_plan){
             Intent i=new Intent(Home.this,Diet_Plan.class);
             startActivity(i);

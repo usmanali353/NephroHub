@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +23,10 @@ import io.paperdb.Paper;
 
 public class ContactUs extends AppCompatActivity {
 EditText message,subject,name,email;
+TextView messagetxt,nametxt,emailtxt,subjecttxt;
 Button send_email;
     String reg_num;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +34,17 @@ Button send_email;
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Paper.init(ContactUs.this);
-        String reg_num= Paper.book().read("Registration_number","Not Found").toString();
+        String reg_num= Paper.book().read("user_id","Not Found").toString();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         message=(EditText) findViewById(R.id.your_message);
         email=(EditText) findViewById(R.id.your_email);
         subject=(EditText) findViewById(R.id.your_subject);
         name=(EditText) findViewById(R.id.your_name);
         send_email=(Button) findViewById(R.id.post_message);
+        messagetxt=(TextView) findViewById(R.id.messagetxt);
+        subjecttxt=(TextView) findViewById(R.id.subjecttxt);
+        emailtxt=(TextView) findViewById(R.id.emailtxt);
+        nametxt=(TextView) findViewById(R.id.nametxt);
         if(!reg_num.equals("Not Found")) {
             name.setText(Paper.book().read("Name").toString());
             name.setEnabled(false);
@@ -54,7 +61,7 @@ Button send_email;
                     Toast.makeText(ContactUs.this,"Email you entered is invalid",Toast.LENGTH_LONG).show();
 
                 }else{
-                    new sendmail(ContactUs.this,"kidneycentergujrat@gmail.com",subject.getText().toString(),"from "+name.getText().toString()+" "+"<"+email.getText().toString()+">"+"\n"+"\n"+message.getText().toString()).execute();
+                   new sendmail(ContactUs.this,"kidneycentergujrat@gmail.com",subject.getText().toString(),"from "+name.getText().toString()+" "+"<"+email.getText().toString()+">"+"\n"+"\n"+message.getText().toString()).execute();
                 }
 
             }

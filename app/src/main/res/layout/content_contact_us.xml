@@ -19,6 +19,7 @@
                 android:paddingLeft="3dp"
                 android:text="Name"
                 android:textAllCaps="true"
+                android:id="@+id/nametxt"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
@@ -36,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="3dp"
                 android:text="Email"
+                android:id="@+id/emailtxt"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
@@ -56,6 +58,7 @@
                 android:paddingLeft="3dp"
                 android:text="Subject"
                 android:textAllCaps="true"
+                android:id="@+id/subjecttxt"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
@@ -74,6 +77,7 @@
                 android:paddingLeft="3dp"
                 android:text="Message"
                 android:textAllCaps="true"
+                android:id="@+id/messagetxt"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 

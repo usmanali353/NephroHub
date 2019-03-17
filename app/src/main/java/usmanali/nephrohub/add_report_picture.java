@@ -1,14 +1,11 @@
 package usmanali.nephrohub;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -30,6 +27,14 @@ import com.google.gson.Gson;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,6 +42,8 @@ import java.util.UUID;
 
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
+import usmanali.nephrohub.Model.Reports;
+import usmanali.nephrohub.Model.dbhelper;
 
 public class add_report_picture extends AppCompatActivity {
     Button Upload_Picture_btn, add_report_btn;
@@ -52,6 +59,7 @@ public class add_report_picture extends AppCompatActivity {
     dbhelper dbh;
     String reg_num;
     Gson g;
+    String resultUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,27 +70,31 @@ public class add_report_picture extends AppCompatActivity {
         Paper.init(add_report_picture.this);
         dbh=new dbhelper(add_report_picture.this);
         g=new Gson();
-        reg_num=Paper.book().read("Registration_number","Not Found");
+        reg_num=Paper.book().read("user_id","Not Found");
         Upload_Picture_btn = (Button) findViewById(R.id.upload_pic_btn);
         report_title = (TextView) findViewById(R.id.report_title);
         ref_by = (TextView) findViewById(R.id.doctor_name);
         add_report_btn = (Button) findViewById(R.id.add_report_btn);
         report_pic = (ImageView) findViewById(R.id.report_pic);
+
         Upload_Picture_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choose_img();
             }
         });
+
         add_report_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!reg_num.equals("Not Found")) {
-                    add_report_to_firebase();
-                }else{
-                    add_image_reports_guest();
+                        if (!reg_num.equals("Not Found")) {
+
+                            add_report_to_firebase();
+                        } else {
+                            add_image_reports_guest();
+                        }
                 }
-            }
+
         });
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -101,7 +113,7 @@ public class add_report_picture extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            String resultUri = result.getUri().getPath();
+             resultUri = result.getUri().getPath();
             image_report_uri = result.getUri();
             bitmap = BitmapFactory.decodeFile(resultUri);
             report_pic.setImageBitmap(bitmap);
@@ -130,7 +142,7 @@ public class add_report_picture extends AppCompatActivity {
                              r.setReport_title(report_title.getText().toString());
                              r.setRef_by(ref_by.getText().toString());
                              r.setImage_url(uri.toString());
-                             image_reports.child(Paper.book().read("Registration_number").toString()).push().setValue(r).addOnSuccessListener(new OnSuccessListener<Void>() {
+                             image_reports.child(Paper.book().read("user_id").toString()).push().setValue(r).addOnSuccessListener(new OnSuccessListener<Void>() {
                                  @Override
                                  public void onSuccess(Void aVoid) {
                                      waiting_dialog.dismiss();
@@ -193,6 +205,7 @@ public class add_report_picture extends AppCompatActivity {
             Toast.makeText(add_report_picture.this, "Please add Required Information",Toast.LENGTH_LONG).show();
         }
     }
+
 }
 
 

@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,16 +25,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import java.util.ArrayList;
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,6 +44,7 @@ import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import usmanali.nephrohub.Model.User;
 
 public class MainActivity extends AppCompatActivity {
     Button btnSignin,btnRegister;
@@ -53,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;//fire authentication object
     FirebaseDatabase db;//firebase db object
     DatabaseReference users;//store reference of node of firebase
-    String rn;//storing registration number
-    long count;// storing count of paatients currently registered
+  // storing count of paatients currently registered
      User user;//object of user class
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                get_last_registration_number();
+                show_register_dialog();
             }
         });
         btnSignin.setOnClickListener(new View.OnClickListener() {
@@ -92,25 +92,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-private String get_last_registration_number(){
-users.addValueEventListener(new ValueEventListener() {
-    @Override
-    public void onDataChange(DataSnapshot dataSnapshot) {
-        count = dataSnapshot.getChildrenCount();
 
-        rn=String.valueOf(count);
-      show_register_dialog();
 
-    }
-
-    @Override
-    public void onCancelled(DatabaseError databaseError) {
-      Toast.makeText(MainActivity.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
-    }
-});
-
-return rn;
-}
     private void show_forgot_password_dialog(){
         AlertDialog.Builder forgot_password_dialog=new AlertDialog.Builder(MainActivity.this);
         forgot_password_dialog .setTitle("Forgot Password");
@@ -165,10 +148,6 @@ return rn;
         password=(MaterialEditText) v.findViewById(R.id.passwordtxt);
         name=(MaterialEditText) v.findViewById(R.id.nametxt);
         phone=(MaterialEditText) v.findViewById(R.id.phone);
-        registration_number=(MaterialEditText) v.findViewById(R.id.regnum);
-        registration_number.setEnabled(false);
-        count=count+1;
-        registration_number.setText("00"+String.valueOf(count)+"-018");
         register_dialog.setView(v);
         register_dialog.setPositiveButton("Register", new DialogInterface.OnClickListener() {
             @Override
@@ -184,8 +163,6 @@ return rn;
                     Toast.makeText(MainActivity.this,"Please Enter Phone",Toast.LENGTH_LONG).show();
                 }else if (TextUtils.isEmpty(name.getText().toString())){
                     Toast.makeText(MainActivity.this,"Please Enter Name",Toast.LENGTH_LONG).show();
-                }else if (TextUtils.isEmpty(registration_number.getText().toString())){
-                    Toast.makeText(MainActivity.this,"Please Enter Registration Number",Toast.LENGTH_LONG).show();
                 }else if(!isEmailValid(email.getText().toString())) {
                     Toast.makeText(MainActivity.this,"Email is not Valid",Toast.LENGTH_LONG).show();
                 }else{
@@ -201,8 +178,6 @@ return rn;
                                 user.setPassword(password.getText().toString());
                                 user.setPhone(phone.getText().toString());
                                 user.setEmail(email.getText().toString());
-                                user.setRegistration_number(registration_number.getText().toString());
-
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
@@ -287,19 +262,22 @@ return rn;
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-                                FirebaseUser userinfo = auth.getCurrentUser();
+                                final FirebaseUser userinfo = auth.getCurrentUser();
                                 if (userinfo.isEmailVerified()) {
                                     users.child(userinfo.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             user = dataSnapshot.getValue(User.class);
-                                            Paper.book().write("Email",email.getText().toString());
-                                            Paper.book().write("Registration_number",user.getRegistration_number());
-                                            Paper.book().write("Name",user.getName());
-                                            Paper.book().write("Phone",user.getPhone());
-                                            Paper.book().write("Password",password.getText().toString());
+                                            if(user!=null) {
+                                                Paper.book().write("Email", email.getText().toString());
+                                                Paper.book().write("Name", user.getName());
+                                                Paper.book().write("user_id",userinfo.getUid());
+                                                Paper.book().write("Phone", user.getPhone());
+                                                Paper.book().write("Password", password.getText().toString());
+                                                 Toast.makeText(MainActivity.this, "Welcome " + user.getName(), Toast.LENGTH_LONG).show();
+                                            }
 
-                                            Toast.makeText(MainActivity.this, "Welcome " + user.getName(), Toast.LENGTH_LONG).show();
+
                                             waiting_dialog.dismiss();
                                             startActivity(new Intent(MainActivity.this, Home.class));
                                             finish();
@@ -346,4 +324,5 @@ return rn;
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
 }
